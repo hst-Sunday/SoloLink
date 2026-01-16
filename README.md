@@ -30,12 +30,12 @@
 2. **启动容器**：
    ```bash
    docker run -d \
-     --name location-api \
+     --name sololink \
      -p 3000:3000 \
      -e ADMIN_USERNAME="admin" \
      -e ADMIN_PASSWORD="your_secure_password" \
      -v $(pwd)/data:/app/data \
-     ghcr.io/hst-Sunday/SoloLink:latest
+     ghcr.io/hst-sunday/sololink:latest
    ```
 
 3. **访问系统**：
@@ -119,6 +119,46 @@
 ## 🔒 隐私说明
 
 本系统设计为私有化部署工具，所有位置数据存储在你自建的服务器 SQLite 数据库中。数据完全归你所有，不会上传到任何第三方云服务。
+
+## ❓ 常见问题
+
+### 账户被锁定如何解锁？
+
+系统内置防暴力破解机制：10 分钟内连续失败 5 次会锁定 IP 2 小时。
+
+**解锁方法（Docker 环境）：**
+```bash
+# 方法一：进入容器执行（推荐）
+docker exec -it sololink sqlite3 /app/data/app.db "DELETE FROM login_attempts WHERE success = 0;"
+
+# 方法二：在主机上直接操作挂载的数据目录
+sqlite3 ./data/app.db "DELETE FROM login_attempts WHERE success = 0;"
+```
+
+**解锁方法（本地开发环境）：**
+```bash
+sqlite3 data/app.db "DELETE FROM login_attempts WHERE success = 0;"
+```
+
+### 如何重置管理员密码？
+
+管理员密码通过环境变量设置，无需操作数据库。
+
+**Docker 环境：**
+```bash
+# 1. 停止容器
+docker compose down
+
+# 2. 修改 docker-compose.yml 或 .env 中的 ADMIN_PASSWORD
+
+# 3. 重新启动
+docker compose up -d
+```
+
+**本地开发环境：**
+```bash
+# 修改 .env 文件中的 ADMIN_PASSWORD，然后重启服务
+```
 
 ## 📄 许可证
 

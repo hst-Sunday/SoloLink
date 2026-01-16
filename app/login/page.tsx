@@ -78,7 +78,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-yellow-50 p-4 font-sans text-black">
-      <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 font-black hover:underline hover:text-cyan-600 transition-colors">
+      <Link href="/" className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center gap-2 font-black hover:underline hover:text-cyan-600 transition-colors">
         <ArrowLeft className="h-5 w-5" strokeWidth={3} /> 返回首页
       </Link>
 

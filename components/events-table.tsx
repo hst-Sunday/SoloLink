@@ -99,10 +99,10 @@ export function EventsTable() {
 
   return (
     <Card className="overflow-hidden rounded-[2rem] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-      <CardHeader className="border-b-4 border-black bg-yellow-300 px-6 py-6">
+      <CardHeader className="border-b-4 border-black bg-yellow-300 px-4 md:px-6 py-4 md:py-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <CardTitle className="text-2xl font-black">充电事件列表</CardTitle>
+            <CardTitle className="text-xl md:text-2xl font-black">充电事件列表</CardTitle>
             <CardDescription className="text-black font-bold opacity-70">共 {total} 条记录</CardDescription>
           </div>
           <div className="flex gap-3">
@@ -152,9 +152,9 @@ export function EventsTable() {
               <TableRow className="border-b-4 border-black bg-black hover:bg-black">
                 <TableHead className="font-black text-white">ID</TableHead>
                 <TableHead className="font-black text-white">设备</TableHead>
-                <TableHead className="font-black text-white">位置</TableHead>
+                <TableHead className="font-black text-white hidden md:table-cell">位置</TableHead>
                 <TableHead className="font-black text-white">电量</TableHead>
-                <TableHead className="font-black text-white">时间</TableHead>
+                <TableHead className="font-black text-white hidden sm:table-cell">时间</TableHead>
                 <TableHead className="font-black text-white text-right">操作</TableHead>
               </TableRow>
             </TableHeader>
@@ -188,7 +188,7 @@ export function EventsTable() {
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden md:table-cell">
                       {event.latitude && event.longitude ? (
                         <div className="flex items-center gap-2">
                           <div className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-black bg-cyan-100">
@@ -224,7 +224,7 @@ export function EventsTable() {
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="font-mono text-sm font-bold">
+                    <TableCell className="font-mono text-sm font-bold hidden sm:table-cell">
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-gray-400" />
                         {formatDate(event.created_at)}
@@ -268,7 +268,7 @@ export function EventsTable() {
 
         {/* 分页 */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between border-t-4 border-black bg-gray-50 p-4">
+          <div className="flex items-center justify-between border-t-4 border-black bg-gray-50 p-3 md:p-4">
             <div className="text-sm font-bold text-gray-500">
               第 {page} 页，共 {totalPages} 页
             </div>
@@ -280,8 +280,8 @@ export function EventsTable() {
                 size="sm"
                 className="h-9 rounded-lg border-2 border-black font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:translate-x-[-1px] hover:translate-y-[-1px] disabled:opacity-50 disabled:shadow-none bg-white"
               >
-                <ChevronLeft className="mr-1 h-4 w-4" strokeWidth={3} />
-                上一页
+                <ChevronLeft className="h-4 w-4 md:mr-1" strokeWidth={3} />
+                <span className="hidden md:inline">上一页</span>
               </Button>
               <Button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
@@ -290,8 +290,8 @@ export function EventsTable() {
                 size="sm"
                 className="h-9 rounded-lg border-2 border-black font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:translate-x-[-1px] hover:translate-y-[-1px] disabled:opacity-50 disabled:shadow-none bg-white"
               >
-                下一页
-                <ChevronRight className="ml-1 h-4 w-4" strokeWidth={3} />
+                <span className="hidden md:inline">下一页</span>
+                <ChevronRight className="h-4 w-4 md:ml-1" strokeWidth={3} />
               </Button>
             </div>
           </div>

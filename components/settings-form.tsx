@@ -157,27 +157,27 @@ export function SettingsForm() {
   return (
     <div className="space-y-8">
       <Tabs defaultValue="api" className="space-y-6">
-        <TabsList className="h-auto w-full justify-start gap-4 rounded-none bg-transparent p-0">
+        <TabsList className="h-auto w-full justify-start gap-2 md:gap-4 rounded-none bg-transparent p-0 pr-4 pb-4 overflow-x-auto">
           <TabsTrigger
             value="api"
-            className="rounded-xl border-2 border-transparent bg-white px-6 py-3 font-black text-gray-500 shadow-none data-[state=active]:border-black data-[state=active]:bg-yellow-400 data-[state=active]:text-black data-[state=active]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+            className="rounded-xl border-2 border-transparent bg-white px-3 md:px-6 py-2 md:py-3 text-sm md:text-base font-black text-gray-500 shadow-none data-[state=active]:border-black data-[state=active]:bg-yellow-400 data-[state=active]:text-black data-[state=active]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all whitespace-nowrap"
           >
             <Key className="mr-2 h-4 w-4" strokeWidth={3} />
-            API 设置
+            <span className="hidden md:inline">API 设置</span><span className="md:hidden">API</span>
           </TabsTrigger>
           <TabsTrigger
             value="email"
-            className="rounded-xl border-2 border-transparent bg-white px-6 py-3 font-black text-gray-500 shadow-none data-[state=active]:border-black data-[state=active]:bg-cyan-300 data-[state=active]:text-black data-[state=active]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+            className="rounded-xl border-2 border-transparent bg-white px-3 md:px-6 py-2 md:py-3 text-sm md:text-base font-black text-gray-500 shadow-none data-[state=active]:border-black data-[state=active]:bg-cyan-300 data-[state=active]:text-black data-[state=active]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all whitespace-nowrap"
           >
             <Mail className="mr-2 h-4 w-4" strokeWidth={3} />
-            邮件设置
+            <span className="hidden md:inline">邮件设置</span><span className="md:hidden">邮件</span>
           </TabsTrigger>
           <TabsTrigger
             value="alert"
-            className="rounded-xl border-2 border-transparent bg-white px-6 py-3 font-black text-gray-500 shadow-none data-[state=active]:border-black data-[state=active]:bg-pink-400 data-[state=active]:text-black data-[state=active]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+            className="rounded-xl border-2 border-transparent bg-white px-3 md:px-6 py-2 md:py-3 text-sm md:text-base font-black text-gray-500 shadow-none data-[state=active]:border-black data-[state=active]:bg-pink-400 data-[state=active]:text-black data-[state=active]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all whitespace-nowrap"
           >
             <Bell className="mr-2 h-4 w-4" strokeWidth={3} />
-            提醒设置
+            <span className="hidden md:inline">提醒设置</span><span className="md:hidden">提醒</span>
           </TabsTrigger>
         </TabsList>
 
@@ -195,7 +195,7 @@ export function SettingsForm() {
         {/* API 设置 */}
         <TabsContent value="api">
           <Card className="rounded-[2rem] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <CardHeader className="border-b-4 border-black bg-yellow-50 px-8 pt-8 pb-6">
+            <CardHeader className="border-b-4 border-black bg-yellow-50 px-4 md:px-8 pt-6 md:pt-8 pb-4 md:pb-6">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-yellow-400">
                   <Shield className="h-6 w-6" strokeWidth={2.5} />
@@ -206,7 +206,7 @@ export function SettingsForm() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6 px-8 py-8">
+            <CardContent className="space-y-6 px-4 md:px-8 py-6 md:py-8">
               <div className="space-y-2">
                 <Label htmlFor="api_key" className="text-lg font-black">
                   API Key
@@ -245,7 +245,7 @@ export function SettingsForm() {
         {/* 邮件设置 */}
         <TabsContent value="email">
           <Card className="rounded-[2rem] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <CardHeader className="border-b-4 border-black bg-cyan-50 px-8 pt-8 pb-6">
+            <CardHeader className="border-b-4 border-black bg-cyan-50 px-4 md:px-8 pt-6 md:pt-8 pb-4 md:pb-6">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-cyan-300">
                   <Mail className="h-6 w-6" strokeWidth={2.5} />
@@ -256,7 +256,7 @@ export function SettingsForm() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6 px-8 py-8">
+            <CardContent className="space-y-6 px-4 md:px-8 py-6 md:py-8">
               <div className="space-y-2">
                 <Label className="text-lg font-black">服务商预设</Label>
                 <Select value={selectedPreset} onValueChange={handlePresetChange}>
@@ -273,7 +273,7 @@ export function SettingsForm() {
                 </Select>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="smtp_host" className="font-black">
                     SMTP 服务器
@@ -300,7 +300,7 @@ export function SettingsForm() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="smtp_user" className="font-black">
                     用户名
@@ -352,7 +352,7 @@ export function SettingsForm() {
 
               <div className="border-t-2 border-dashed border-gray-300 pt-6">
                 <h4 className="font-black text-gray-500 mb-4 uppercase text-sm tracking-wider">收发配置</h4>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="email_from" className="font-black">
                       发件人名称/邮箱
@@ -407,7 +407,7 @@ export function SettingsForm() {
         {/* 提醒设置 */}
         <TabsContent value="alert">
           <Card className="rounded-[2rem] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <CardHeader className="border-b-4 border-black bg-pink-50 px-8 pt-8 pb-6">
+            <CardHeader className="border-b-4 border-black bg-pink-50 px-4 md:px-8 pt-6 md:pt-8 pb-4 md:pb-6">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-pink-400">
                   <Clock className="h-6 w-6" strokeWidth={2.5} />
@@ -418,8 +418,8 @@ export function SettingsForm() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6 px-8 py-8">
-              <div className="grid grid-cols-2 gap-6">
+            <CardContent className="space-y-6 px-4 md:px-8 py-6 md:py-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="alert_hours" className="text-lg font-black">
                     超时阈值 (小时)

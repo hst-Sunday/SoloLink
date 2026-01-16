@@ -5,7 +5,7 @@ import Image from "next/image"
 import { ArrowLeft, Smartphone, Zap, Check, Copy, QrCode, ChevronRight } from "lucide-react"
 import { useState } from "react"
 
-const SHORTCUT_URL = "https://www.icloud.com/shortcuts/54c4560c4a474d97ad4d173213d1edef"
+const SHORTCUT_URL = "https://www.icloud.com/shortcuts/0f349a5d28dd4bffae3031d37ff902f0https://www.icloud.com/shortcuts/0f349a5d28dd4bffae3031d37ff902f0"
 
 export default function StartPage() {
     const [copied, setCopied] = useState(false)

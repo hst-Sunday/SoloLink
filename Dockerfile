@@ -12,12 +12,17 @@ WORKDIR /app
 # ---- 依赖安装阶段 ----
 FROM base AS deps
 
+# 安装构建原生模块所需的工具
+RUN apk add --no-cache python3 make g++
+
 # 复制依赖配置文件
 COPY package.json pnpm-lock.yaml ./
 
-# 安装依赖（包括 better-sqlite3 的原生依赖）
-RUN apk add --no-cache python3 make g++ && \
-    pnpm install --frozen-lockfile
+# 安装依赖，确保原生模块被编译
+# --shamefully-hoist 创建扁平化的 node_modules 结构
+RUN pnpm install --frozen-lockfile && \
+    cd node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3 && \
+    npm run build-release
 
 # ---- 构建阶段 ----
 FROM base AS builder
@@ -52,8 +57,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# 复制 better-sqlite3 原生模块（Next.js standalone 不会自动包含）
-COPY --from=builder /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
+# 复制完整的 node_modules（包含编译好的原生模块）
+COPY --from=deps /app/node_modules ./node_modules
 
 # 创建数据目录并设置权限
 RUN mkdir -p /app/data && chown -R nextjs:nodejs /app

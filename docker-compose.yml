@@ -1,0 +1,16 @@
+services:
+  sololink:
+    image: ghcr.io/hst-sunday/sololink:latest
+    container_name: sololink
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      - LOCATION_API_KEY=${LOCATION_API_KEY:-}
+    volumes:
+      - ./data:/app/data
+    # 或者直接使用 .env 文件
+    # env_file:
+    #   - .env

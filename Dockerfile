@@ -52,6 +52,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
+# 复制 better-sqlite3 原生模块（Next.js standalone 不会自动包含）
+COPY --from=builder /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
+
 # 创建数据目录并设置权限
 RUN mkdir -p /app/data && chown -R nextjs:nodejs /app
 
